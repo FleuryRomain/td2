@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="well span8 offset2">
+        <div class="row-fluid user-infos cyruxx">
+            <div class="span10 offset1">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">SSN number</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <strong>{{recapPerson.lastname}} {{recapPerson.firstname}}</strong><br>
+                                <table class="table table-condensed table-responsive table-user-information">
+                                    <tbody>
+
+                                    <!-- Sexe de la personne-->
+                                    <tr>
+                                        <td>Sex:</td>
+                                        <td>{{recapPerson.sex}}</td>
+                                    </tr>
+
+                                    <!-- Date de naissance de la personne-->
+                                    <tr>
+                                        <td>Age:</td>
+                                        <td>{{ageCalculation(recapPerson.birthDate)}} ans</td>
+                                    </tr>
+
+                                    <!-- Département de naissance de la personne-->
+                                    <tr>
+                                        <td>Department of birth:</td>
+                                        <td>{{recapPerson.birthPlace.dept}} {{departmentName}}</td>
+                                    </tr>
+
+                                    <!-- Cas où la personne est née en France-->
+                                    <tr *ngIf="recapPerson.birthPlace.dept !== 'Stranger'">
+                                        <td>Municipality birthplace:</td>
+                                        <td>{{recapPerson.birthPlace.municipality}} {{municipalityName}}</td>
+                                    </tr>
+
+                                    <!-- Cas où la personne est née à l'étranger-->
+                                    <tr *ngIf="recapPerson.birthPlace.dept === 'Stranger'">
+                                        <td>Pays de naissance:</td>
+                                        <td>{{recapPerson.birthPlace.municipality}} {{municipalityName}}</td>
+                                    </tr>
+
+                                    <!-- Position de naissance de la personne-->
+                                    <tr>
+                                        <td>Birth position:</td>
+                                        <td>{{recapPerson.birthPosition}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="container">
+    <div class="section">
+        <div ng-app>
+            <h1>SSN form</h1>
+            <form class=" text-center" [formGroup]="Ssnform" (ngSubmit)="onSubmit()">
+                
+                <!-- Field for lastname infos -->
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" id="firstname" class="form-control" placeholder="Your firstname" formControlName="firstname">
+                </div>
+                <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="alert-danger">
+                    <div *ngIf="firstname.errors.required">
+                        Firstname is required.
+                    </div>
+                </div>
+
+                <!-- Field for fristname infos -->
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" id="lastname" class="form-control" placeholder="Your lastname" formControlName="lastname">
+                </div>
+                <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class=" alert-danger">
+                    <div *ngIf="lastname.errors.required">
+                        Lastname is required.
+                    </div>
+                </div>
+    
+                <!-- Field for SSN infos -->
+                <div class="form-group">
+                    <label for="ssn">SSN number</label>
+                    <input type="text" id="ssn" class="form-control" placeholder="Your SSN" formControlName="ssn">
+                </div>
+                <div *ngIf="isSsnOk" class=" alert-danger">
+                    <div *ngIf="ssn.errors.required">
+                        Ssn is required.
+                    </div>
+                </div>
+                <p>form status : {{Ssnform.status}}</p>
+                <button type="submit" class="btn btn-primary" [disabled]="!Ssnform.valid">Submit</button> 
+            </form>
+        </div>
+        <!-- Display person's infos -->
+        <detail-ssn *ngIf="recapPerson" [recapPerson]="recapPerson"></detail-ssn>
+    </div>
+</div>
+
+<div class="container">
+    <div class="section">
+        <div ng-app>
+            <ul class="list-group">
+                <!-- Display historical infos of all persons -->
+                <historique-ssn *ngFor="let person of arrayPerson" 
+                    [person]="person" 
+                    (recapDisplayed)="displayInfoFromHisto($event)">
+                </historique-ssn>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- 
+
+<div class="jumbotron row">
+    <div class="col-sm-4">
+        <form class=" text-center" [formGroup]="Ssnform" (ngSubmit)="onSubmit()">
+            <fieldset>
+                
+                <legend>Please fill the fields</legend>
+
+                
+                <div class="form-group">
+                    <label class="control-label">Lastname</label>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input class="form-control" type="text" formControlName="lastname">
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="control-label">Firstname</label>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        <input class="form-control" type="text" formControlName="firstname">
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="control-label">SSN number</label>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-id-card"></i></div>
+                        <input class="form-control" type="text" formControlName="ssn">
+                    </div>
+                </div>
+
+                
+                <div *ngIf="!Ssnform.valid; else valid">
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <div>
+                            <button class="btn btn-secondary" type="submit" disabled>Submit</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="alert alert-danger"> SSN number is invalid.</div>
+                </div>
+
+                
+                <ng-template #valid>
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                        <div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </div>
+
+                    
+                    <div class="alert alert-success">SSN number is invalid. You can submit.</div>
+                </ng-template>
+            </fieldset>
+
+        </form>
+
+    </div>
+
+    
+    <div class="col-sm-4">
+        <detail-ssn *ngIf="recapPerson" [recapPerson]="recapPerson"></detail-ssn>
+    </div>
+
+    
+    <div class="col-sm-4">
+
+        <legend style="text-align: center">Historical inputs</legend>
+
+        <ul class="list-group">
+
+        <historique-ssn *ngFor="let person of arrayPerson"
+                    [person]="person"
+                    (recapDisplayed)="displayInfoFromHisto($event)">
+        </historique-ssn>
+        </ul>
+    </div>
+</div>
+
+ -->
